@@ -1,0 +1,45 @@
+<% if logged_in? and @user == current_user %>
+  <!-- <h3>Your Profile</h3> -->
+
+<% elsif logged_in? and current_user.related?(@user) %>
+  <h3>
+    <%#= current_user.relation(@user).size %>
+    <hr />
+    <% current_user.relation(@user).each do |relationship| %>
+        <%#= relationship.class %><%#= relationship.inspect %><br />
+        
+          <% n1 = @user.get_start_node(relationship) %>
+          <% n2 = @user.get_end_node(relationship) %>
+          <% if n1.fbid == current_user.fbid %>
+            You were
+          <% else %>
+            <%= link_to image_tag(n1.fb_image_url, :style => 'padding-right:5px'), user_path(n1.id) %>
+            <%= link_to n1.name, user_path(n1.id) %> was
+          <% end %>
+        
+           introduced to Bob's Donuts by
+        
+           <% if n2.fbid == current_user.fbid %>
+             You
+           <% else %>
+             <%= link_to image_tag(n2.fb_image_url, :style => 'padding-right:5px'), user_path(n2.id) %>
+             <%= link_to n2.name, user_path(n2.id) %>.
+           <% end %>
+      
+        
+        
+        
+    
+
+      <%# p = path.map{|p| p[:name]}.compact.join('->') %>
+      <%#= "Path #{p.to_s}" %>
+    <% end %>
+  </h3>
+<% else %>
+  You and <%= @user.name %> are not Bob's Donuts relations ... Yet!
+<% end %>
+<hr />
+
+
+
+

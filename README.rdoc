@@ -1,0 +1,32 @@
+# Get A Connection @neo ||= Neography Rest Client
+
+$neo = Neography Rest Client in initializer
+
+def neo_con
+  if $neo 
+   return $neo
+  else
+    $neo = Neography Rest Client in initializer
+    Rails.logger.info("Neography COnnection Got Dropped")
+  end 
+end 
+
+
+
+Model FriendShips
+#
+
+# rails g scaffold user name:string email:String, fbid:string, registered:boolean, fb_access_token:string, favorite_donut:string, last_login:time, state:string is_bobfather:boolean
+
+property :name, :type => String, :index => :exact
+property :email, :type => String
+property :fbid, :type => String, :index => :exact, :unique => true
+property :registered, :type => :boolean, :default => false #, :index => :exact
+
+property :fb_access_token, :type => String
+property :favorite_donut, :type => String, :index => :exact
+property :last_login, :type => Time
+property :state, :type => String, :index => :exact
+# use this as an explicity indication of Bobfatherhood by the user
+property :is_bobfather, :type => :boolean, :default => false
+

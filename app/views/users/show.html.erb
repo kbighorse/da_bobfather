@@ -1,0 +1,78 @@
+<hr>
+
+<div class="jumbotron">
+  <p>
+    <%= image_tag(@user.fb_image_url('large') ) %>
+  </p>
+  <p>
+    <h1><%= @user.name %></h1>
+
+  </p>
+  <p>
+    <% if @user.lineage_total > 0 %>
+      <%= @user.lineage_total %> Bob's Progeny
+    <% end %>
+  </p>
+  <p>
+    <% if @user.bobchildren.count > 0 %>
+      <%= @user.bobchildren.count %> bobchildren
+    <% end %>
+  </p>
+
+  <p>
+    <% if !@user.registered? %>
+    <b> <%= @user.name %> has not signed up yet.  Invite them</b>
+    <% end %>
+  </p>
+  <p>
+    <%= render :partial => "shared/relationship" %>
+  </p>
+
+  
+</div>
+<div class="row-fluid marketing">
+  <div class="span6">
+    <p class="lead"><%= possesive_helper(@user) %> Bobfather</p>
+
+    <p>
+      <% if @user.bobfather %>
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => @user.bobfather}%>
+      <% else %>
+        <%= @user.bobfather_status %>
+      <% end %>
+    </p>
+  </div>
+  <div class="span6">
+    <p class="lead">Bobfather of <%= possesive_helper(@user) %> Lineage</p>
+    <p>
+      <% if @user.bobfather %>
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => @user.don_bobfather}%>
+      <% else %>
+        <%= @user.bobfather_status %>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<hr>
+<p class="lead"><%= possesive_helper(@user) %> Bobchildren</p>
+
+<div class="row">
+  <% if @user.has_bobchildren? %>
+    <% @user.bobchildren.each do |user| %>
+      <div class="span3">
+        <%= render :partial => "users/mini_profile", 
+        :locals => {:user => user}%>
+      </div>
+    <% end %>
+  <% else %>
+    This User has no Bobchildren.  His/Her Lineage Stops here
+  <% end %>
+</div>
+<hr>
+
+
+
+<%#= link_to 'Back', users_path %>

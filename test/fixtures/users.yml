@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  email: 
+  fbid: 
+  registered: 
+  fb_access_token: 
+  favorite_donut: 
+  last_login: 
+  state: MyString
+  is_bobfather: false
+
+two:
+  name: MyString
+  email: 
+  fbid: 
+  registered: 
+  fb_access_token: 
+  favorite_donut: 
+  last_login: 
+  state: MyString
+  is_bobfather: false

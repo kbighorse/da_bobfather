@@ -1,0 +1,13 @@
+<p>
+  <%= image_tag(user.fb_image_url, :class => "", :style => 'padding-right:5px')%>
+  <small>
+  <p>
+    <% if user.bobchildren.count > 0 %>
+      <%= pluralize user.bobchildren.count,  'Bobchild' %> 
+    <% end %>
+  </p>
+  </small>
+</p>
+<p>
+  <%= link_to user.name, user_path(user) %>
+</p>
