@@ -1,5 +1,7 @@
 DaBobfather::Application.routes.draw do
 
+  match "redirect" => "redirect#index"
+  
   get "sessions/create"
 
   resource :welcome, :only => [:index], :controller => :welcome do

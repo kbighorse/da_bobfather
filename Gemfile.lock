@@ -172,6 +172,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   puma
+  rack-ssl
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   simple_form

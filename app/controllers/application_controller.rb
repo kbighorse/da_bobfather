@@ -3,7 +3,24 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
+  before_filter :https_redirect
+
   private
+
+  def https_redirect
+    #if ENV["ENABLE_HTTPS"] == "yes"
+      if request.ssl? && !use_https? || !request.ssl? && use_https?
+        protocol = request.ssl? ? "http" : "https"
+        flash.keep
+        redirect_to protocol: "#{protocol}://", status: :moved_permanently
+      end
+    #end
+  end
+
+  def use_https?
+    false # Override in other controllers
+  end
+
 
   def current_user
     # hack to dev

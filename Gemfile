@@ -54,3 +54,5 @@ gem 'puma'
 gem 'newrelic_rpm'
 # gem 'ancestry'
 gem 'neography'
+gem 'rack-ssl'
+# gem "thin"
