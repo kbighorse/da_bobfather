@@ -56,3 +56,12 @@ gem 'newrelic_rpm'
 gem 'neography'
 gem 'rack-ssl'
 # gem "thin"
+
+gem 'sendgrid'
+gem 'sendgrid_toolkit'
+gem 'redis'
+gem 'resque'
+gem 'resque_mailer'
+
+gem 'sendgrid'
+gem 'sendgrid_toolkit'

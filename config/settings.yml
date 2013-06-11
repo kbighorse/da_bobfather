@@ -1,0 +1,41 @@
+# #### #
+# localhost:3000
+# #### #
+development:
+  redis_server: localhost #'ec2-50-19-159-133.compute-1.amazonaws.com' #'ec2-50-19-24-87.compute-1.amazonaws.com' 
+  redis_port: 6379
+  redis_user: 'syfto'
+  redis_password: 'foobaredturkey'
+  
+
+
+# #### #
+# www-test.syfto.com
+# #### #
+test:
+
+
+# #### #
+# www-staging.syfto.com
+# #### #
+staging:
+  redis_server: 'www-staging.syfto.com' #       '10.124.13.243'
+  redis_port: 6379
+  redis_user: 'syfto' #doesn't matter
+  redis_user: 'syfto'
+  redis_password: 'foobaredturkey'
+  
+
+
+
+# #### #
+# www.syfto.com
+# #### #
+production:
+  # This is prod-web-01
+  redis_server:       '10.90.161.221'
+  redis_port: 6379
+  redis_user: 'syfto'
+  redis_password: 'foobaredturkey'
+  
+  

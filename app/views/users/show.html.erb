@@ -20,7 +20,7 @@
   </p>
 
   <p>
-    <%= link_to_function("Invite #{@user.name}", "sendRequestToRecipients();") %>
+
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
@@ -43,7 +43,7 @@
     }
     </script>
     <% if !@user.registered? %>
-    <b> <%= @user.name %> has not signed up yet.  Invite them</b>
+    <b> <%= @user.name %> has not signed up yet.  <%= link_to_function("Invite #{@user.name}", "sendRequestToRecipients();") %></b>
     <% end %>
   </p>
   <p>
@@ -70,7 +70,7 @@
     <p>
       <% if @user.bobfather %>
         <%= render :partial => "users/mini_profile", 
-        :locals => {:user => @user.don_bobfather}%>
+        :locals => {:user => @user.don_bobfather} %>
       <% else %>
         <%= @user.bobfather_status %>
       <% end %>

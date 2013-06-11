@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   FRIENDS_REL = "friends"
   BOBFATHER_REL = "bobfather"
 
+  LARGE_NUMBER = 10 # the "all" depth option isn't supported in many places
 
   def neo_con
     if $neo 
@@ -321,7 +322,7 @@ class User < ActiveRecord::Base
       {"uniqueness" => "node global",
         "relationships" => [{"type"=> BOBFATHER_REL, # A hash containg a description of the traversal
                              "direction" => "in"}],
-      "depth" => "all"})
+      "depth" => LARGE_NUMBER})
     #self.incoming(:bobfather).depth(:all).count
     # puts nodes
     return nodes.size
@@ -361,7 +362,7 @@ class User < ActiveRecord::Base
         {"uniqueness" => "node global",
           "relationships" => [{"type"=> BOBFATHER_REL, # A hash containg a description of the traversal
                                "direction" => "out"}],
-        "depth" => "all"})
+        "depth" => LARGE_NUMBER})
       #self.incoming(:bobfather).depth(:all).count
       # puts nodes
     return false if !nodes.last 
@@ -380,6 +381,7 @@ class User < ActiveRecord::Base
   def get_fb_friends    
     fb_user = FbGraph::User.me(self.fb_access_token)
     my_friends = fb_user.friends
+    friend_ids_list = self.friend_ids
     my_friends.each do |f|
       # puts("f.identifier::#{f.identifier} pre search")
       u = User.find_by_fbid(f.identifier)
@@ -391,12 +393,13 @@ class User < ActiveRecord::Base
       end
       u.name = f.name if !u.name
       u.save # has to be here to persist friends name
-      if self.friend_ids.include?(u.id)
+      if friend_ids_list.include?(u.id)
         puts "already a friend #{u.name}"
       else
         puts "adding a friend #{u.name}"
         self.add_to_friends(u)
-        
+        # keep track in an array so i don't do 5K queries and timeout
+        friend_ids_list << u.id
       end
       
     end

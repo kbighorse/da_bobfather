@@ -2,8 +2,13 @@ class UsersController < ApplicationController
   before_filter :require_login, :except => [:show]
 
   def facebook_friends
-    @user = User.find(params[:id])
-    @user.get_fb_friends
+    begin
+      @user = User.find(params[:id])
+      @user.get_fb_friends
+    rescue Timeout::Error => e
+      @error = e
+      #render :action => "error"
+    end
     respond_to do |format|
       format.html {redirect_to edit_user_path(@user), :notice => "updated facebook friends list" and return}
       format.js {}
